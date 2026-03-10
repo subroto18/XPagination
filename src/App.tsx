@@ -12,7 +12,7 @@ function App() {
   const [loginStatus, setLogisStatus] = useState<LoginStatus>("");
 
   const show_message = {
-    success: "Welcome, user",
+    success: "Welcome, user!",
     invalid: "Invalid username or password",
   };
 
