@@ -1,28 +1,77 @@
 import Layout from "../common/Layout";
-import Textarea from "../../ui/Textarea/";
-import { useEffect, useState } from "react";
-import useDictionary from "../../hooks/useDictionary";
+import Select from "../../ui/Select";
+import useCountry from "../../hooks/useCountry";
+import Styles from "./Home.module.css";
+import { useState } from "react";
+import useStates from "../../hooks/useStates";
+import useCity from "../../hooks/useCity";
 
 const Index = () => {
-  const { getWord, misspelled } = useDictionary();
-  const [search, setSearch] = useState("");
+  const { loading, countries, error } = useCountry();
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const {
+    loading: stateLoading,
+    states,
+    error: stateError,
+  } = useStates(selectedCountry);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setSearch(e.target.value);
+  const {
+    loading: cityLoading,
+    cities,
+    error: cityError,
+  } = useCity(selectedCountry, selectedState);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCountry(e.target.value);
+    setSelectedState("");
+    setSelectedCity("");
   };
 
-  useEffect(() => {
-    getWord(search);
-  }, [search]);
+  const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedState(e.target.value);
+    setSelectedState("");
+  };
+
+  const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCity(e.target.value);
+  };
 
   return (
     <Layout>
-      <div className="search_section">
-        <Textarea value={search} onChange={handleChange} />
+      <div className={Styles.container}>
+        <Select
+          id="country"
+          label="Select Country"
+          onChange={handleCountryChange}
+          disabled={loading && error ? true : false}
+          options={countries}
+        />
+
+        <Select
+          id="state"
+          label="Select State"
+          onChange={handleStateChange}
+          disabled={stateLoading && stateError ? true : false}
+          options={states}
+        />
+
+        <Select
+          id="city"
+          label="Select City"
+          onChange={handleCityChange}
+          disabled={cityLoading && cityError ? true : false}
+          options={cities}
+        />
       </div>
-      {misspelled && (
-        <p className="definition">
-          Did you mean: <strong>{misspelled}</strong>?
+      {selectedCountry && selectedState && selectedCity && (
+        <p className={Styles.selectedText}>
+          You selected{" "}
+          <span className={Styles.selectedCountry}>{selectedCountry},</span>
+          <span className={Styles.selectedState}>
+            {selectedState},{selectedCity}
+          </span>
         </p>
       )}
     </Layout>

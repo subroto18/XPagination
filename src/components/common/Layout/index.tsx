@@ -1,3 +1,4 @@
+import Styles from "./Home.module.css";
 type LayoutProps = {
   search?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -5,14 +6,14 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
-const TITLE = "Spell Check and Auto-Correction";
+const TITLE = "Select Location";
 
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
-      <div className="parent_section">
-        <div className="parent">
-          <h1 className="heading">{TITLE}</h1>
+      <div className={Styles.parent_section}>
+        <div className={Styles.parent}>
+          <h1 className={Styles.heading}>{TITLE}</h1>
           {children}
         </div>
       </div>

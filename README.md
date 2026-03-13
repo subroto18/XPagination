@@ -1,87 +1,88 @@
-# Spelling Checker App
+🌍 Location Selector (Country → State → City)
 
-A simple React application that checks spelling and automatically corrects common mistakes as the user types. The app uses a custom dictionary to detect incorrect words and replace them with the correct spelling.
+A simple React application that allows users to select a Country, State, and City using cascading dropdowns. The data is fetched dynamically from an API.
 
-## 🚀 Features
+🚀 Features
 
-- Real-time spelling correction
-- User-friendly interface
-- Built with React and TypeScript
-- Uses a custom dictionary for word correction
-- Lightweight and fast
+Select Country → State → City
 
-## 🛠️ Technologies Used
+Dynamic API fetching
 
-- React
-- TypeScript
-- CSS
+Custom React hooks
 
-## 📖 How It Works
+Reusable Select component
 
-1. The user types text into the textarea.
-2. The application checks each word against a predefined dictionary.
-3. If a word is misspelled, the app replaces it with the correct spelling.
-4. The corrected text is displayed instantly.
+Loading and error handling
 
-Example:
+Built with React + TypeScript
 
-Input:
+🛠 Tech Stack
 
-```
-I wrok fot this exampl
-```
+React
 
-Output:
+TypeScript
 
-```
-I work for this example
-```
+CSS
 
-## 📂 Project Structure
+Custom React Hooks
 
-```
-src/
- ├── components/
- ├── dictionary/
- │    └── customDictionary.ts
- ├── App.tsx
- ├── index.tsx
- └── styles.css
-```
+Fetch API
 
-## 📦 Installation
+📦 API Used
+
+Country, State, and City data are fetched from:
+
+https://location-selector.labs.crio.do
+Endpoints
+
+Get Countries
+
+https://location-selector.labs.crio.do/countries
+
+Get States
+
+https://location-selector.labs.crio.do/countries/{country}/states
+
+Get Cities
+
+https://location-selector.labs.crio.do/countries/{country}/states/{state}/cities
+📂 Project Structure
+src
+│
+├── components
+│ └── Select.tsx
+│
+├── hooks
+│ ├── useCountries.ts
+│ ├── useStates.ts
+│ └── useCities.ts
+│
+├── App.tsx
+└── main.tsx
+⚙️ Installation
 
 Clone the repository:
 
-```
-git clone https://github.com/your-username/spell-checker-app.git
-```
+git clone <your-repo-url>
 
-Go to the project folder:
+Navigate into the project:
 
-```
-cd spell-checker-app
-```
+cd location-selector
 
 Install dependencies:
 
-```
 npm install
-```
 
-Run the project:
+Start the development server:
 
-```
 npm run dev
-```
+💡 How It Works
 
-## 🎯 Future Improvements
+The app loads all available countries.
 
-- Add a larger dictionary
-- Highlight incorrect words
-- Support multiple languages
-- Add suggestion dropdown for corrections
+When a user selects a country, the app fetches its states.
 
----
+When a user selects a state, the app fetches its cities.
 
-Made with ❤️ using React and TypeScript.
+Each dropdown updates dynamically.
+# XState
