@@ -1,15 +1,16 @@
 import { Component } from "react";
 import Styles from "./Button.module.css";
 type Props = {
-  label: string;
-  onClick: () => void;
+  label: string | number;
+  onClick?: () => void;
+  disabled?: boolean;
 };
 
 class Button extends Component<Props> {
   render() {
-    const { label, onClick } = this.props;
+    const { label, onClick, disabled } = this.props;
     return (
-      <button className={Styles.button} onClick={onClick}>
+      <button disabled={disabled} className={Styles.button} onClick={onClick}>
         {label}
       </button>
     );

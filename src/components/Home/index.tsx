@@ -1,82 +1,34 @@
 import Layout from "../common/Layout";
-import Select from "../../ui/Select";
-import useCountry from "../../hooks/useCountry";
-import Styles from "./Home.module.css";
+import Table from "../../components/common/Table";
+import useUser from "../../hooks/useUser";
+import Pagination from "../common/Pagination";
 import { useState } from "react";
-import useStates from "../../hooks/useStates";
-import useCity from "../../hooks/useCity";
+
+const itemsPerPage = 10;
 
 const Index = () => {
-  const { loading, countries, error } = useCountry();
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const {
-    loading: stateLoading,
-    states,
-    error: stateError,
-  } = useStates(selectedCountry);
+  const { users, loading, error } = useUser();
 
-  const {
-    loading: cityLoading,
-    cities,
-    error: cityError,
-  } = useCity(selectedCountry, selectedState);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCountry(e.target.value);
-    setSelectedState("");
-    setSelectedCity("");
-  };
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
-  const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedState(e.target.value);
-    setSelectedCity("");
-  };
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = users.slice(startIndex, endIndex);
 
-  const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCity(e.target.value);
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
   };
 
   return (
     <Layout>
-      <div className={Styles.container}>
-        <Select
-          id="country"
-          label="Select Country"
-          value={selectedCountry}
-          onChange={handleCountryChange}
-          disabled={loading && error ? true : false}
-          options={countries}
-        />
-
-        <Select
-          id="state"
-          label="Select State"
-          value={selectedState}
-          onChange={handleStateChange}
-          disabled={stateLoading && stateError ? true : false}
-          options={selectedCountry ? states : []}
-        />
-
-        <Select
-          id="city"
-          label="Select City"
-          value={selectedCity}
-          onChange={handleCityChange}
-          disabled={cityLoading && cityError ? true : false}
-          options={selectedState ? cities : []}
-        />
-      </div>
-      {selectedCountry && selectedState && selectedCity && (
-        <span className={Styles.selectedText}>
-          You selected{" "}
-          <span className={Styles.selectedCountry}>{selectedCity}</span>,{" "}
-          <span className={Styles.selectedState}>
-            {selectedState}, {selectedCountry}
-          </span>
-        </span>
-      )}
+      <Table loading={loading} error={error} data={currentData} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onClick={handlePageChange}
+      />
     </Layout>
   );
 };
