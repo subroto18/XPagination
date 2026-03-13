@@ -10,7 +10,7 @@ type Props = {
   disabled?: boolean;
 };
 
-const index = ({ id, options, label, onChange, disabled }: Props) => {
+const index = ({ id, options, label, onChange, disabled, value }: Props) => {
   return (
     <>
       <select
@@ -18,6 +18,7 @@ const index = ({ id, options, label, onChange, disabled }: Props) => {
         className={Styles.select}
         id={id}
         disabled={disabled}
+        value={value}
       >
         <option selected value="" disabled>
           {label || "Select"}
