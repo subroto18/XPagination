@@ -7,20 +7,12 @@ type Props = {
   onClick: (page: number) => void;
 };
 
-const index = ({ currentPage, totalPages, onClick }: Props) => {
+const index = ({ currentPage, onClick }: Props) => {
   return (
     <div className={Styles.pagination}>
-      <Button
-        onClick={() => onClick(currentPage - 1)}
-        disabled={currentPage === 1}
-        label="Previous"
-      />
+      <Button onClick={() => onClick(currentPage - 1)} label="Previous" />
       <span className={Styles.pageNo}>{currentPage}</span>
-      <Button
-        onClick={() => onClick(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        label="Next"
-      />
+      <Button onClick={() => onClick(currentPage + 1)} label="Next" />
     </div>
   );
 };
