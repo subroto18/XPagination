@@ -13,7 +13,7 @@ const useUser = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to fetch countries");
+        throw new Error("failed to fetch data");
       }
 
       const data = await response.json();
