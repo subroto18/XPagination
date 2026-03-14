@@ -24,9 +24,7 @@ const Index = ({ data, loading, error }: Props) => {
       </thead>
       <tbody>
         {error ? (
-          <tr key={"1"} className={styles.trloading}>
-            <td className={styles.td}>{error}</td>
-          </tr>
+          <p>{error}</p>
         ) : loading ? (
           <>
             {[...Array(10)].map((_, index) => {

@@ -3,7 +3,7 @@ import Table from "../../components/common/Table";
 import useUser from "../../hooks/useUser";
 import Pagination from "../common/Pagination";
 import { useState } from "react";
-
+import Styles from "./Home.module.css";
 const itemsPerPage = 10;
 
 const Index = () => {
@@ -20,7 +20,10 @@ const Index = () => {
 
   return (
     <Layout>
-      <Table loading={loading} error={error} data={currentData} />
+      <div className={Styles.tableDiv}>
+        <Table loading={loading} error={error} data={currentData} />
+      </div>
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

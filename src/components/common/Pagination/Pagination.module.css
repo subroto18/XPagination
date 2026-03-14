@@ -2,10 +2,23 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: -10px;
 }
 .pageNo {
   background-color: #39b098;
   padding: 10px;
   border-radius: 5px;
   color: #fff;
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+  .pagination {
+    margin-top: -10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pagination {
+    margin-top: 10px;
+  }
 }
