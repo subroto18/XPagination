@@ -21,6 +21,7 @@ const useUser = () => {
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
+        alert(err.message);
       }
     } finally {
       setLoading(false);

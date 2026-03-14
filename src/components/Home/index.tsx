@@ -8,11 +8,8 @@ const itemsPerPage = 10;
 
 const Index = () => {
   const { users, loading, error } = useUser();
-
   const [currentPage, setCurrentPage] = useState(1);
-
   const totalPages = Math.ceil(users.length / itemsPerPage);
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentData = users.slice(startIndex, endIndex);
