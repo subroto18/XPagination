@@ -3,3 +3,9 @@
   justify-content: center;
   gap: 10px;
 }
+.pageNo {
+  background-color: #39b098;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+}

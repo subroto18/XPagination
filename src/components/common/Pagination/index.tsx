@@ -15,7 +15,7 @@ const index = ({ currentPage, totalPages, onClick }: Props) => {
         disabled={currentPage === 1}
         label="Previous"
       />
-      <Button disabled={true} label={currentPage} />
+      <span className={Styles.pageNo}>{currentPage}</span>
       <Button
         onClick={() => onClick(currentPage + 1)}
         disabled={currentPage === totalPages}
